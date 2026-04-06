@@ -2204,69 +2204,64 @@
         }
 
         // Collect all data
-        var result = { timestamp: new Date().toISOString() };
+        var result = {};
+        result.id = crypto.randomUUID();
+        result.timestamp = new Date().toISOString();
+        result.respondentPath = isSmoker ? "smoker" : isExSmoker ? "ex-smoker" : "non-smoker";
 
-        // Radios
-        [
-          "age",
-          "smoker",
-          "frequency",
-          "wantQuit",
-          "triedQuit",
-          "exQuitWhen",
-          "exCravings",
-          "exWouldHelp",
-          "exGift",
-          "wantBreak",
-          "wantSupport",
-          "giftSmoke",
-          "resonate",
-          "wouldTry",
-          "wouldBuy",
-          "subscribe",
-        ].forEach(function (name) {
+        // Helper to read a radio value
+        function radio(name) {
           var el = document.querySelector('input[name="' + name + '"]:checked');
-          result[name] = el ? el.value : "";
-        });
+          return el ? el.value : "";
+        }
+        // Helper to read checked checkboxes as semicolon-separated string
+        function checks(name) {
+          return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+            .map(function (c) { return c.value; })
+            .join("; ");
+        }
 
-        // Checkboxes
-        ["motivator", "enjoys", "nsImpact", "buyFor", "channel"].forEach(
-          function (name) {
-            var checked = document.querySelectorAll(
-              'input[name="' + name + '"]:checked',
-            );
-            result[name] = Array.from(checked)
-              .map(function (c) {
-                return c.value;
-              })
-              .join("; ");
-          },
-        );
+        // Section 1 — About You
+        result.age = radio("age");
+        result.smokerType = radio("smoker");
+        result.smokingFrequency = radio("frequency");
 
-        // Scales
-        result.clarity = scaleValues["clarity"] || "";
+        // Section 2 — Smoker path
+        result.wantToQuit = radio("wantQuit");
+        result.triedToQuit = radio("triedQuit");
+        result.quitMotivator = checks("motivator");
+        result.smokingEnjoys = checks("enjoys");
 
-        // Price
-        result.price = document.querySelector('input[name="price"]').value;
+        // Section 2 — Ex-smoker path
+        result.exQuitWhen = radio("exQuitWhen");
+        result.exStillHasCravings = radio("exCravings");
+        result.exSpearWouldHaveHelped = radio("exWouldHelp");
+        result.exWouldGiftSpear = radio("exGift");
 
-        // Textareas
-        result.tryBarrier = document.querySelector(
-          'textarea[name="tryBarrier"]',
-        ).value;
-        result.finalThoughts = document.querySelector(
-          'textarea[name="finalThoughts"]',
-        ).value;
+        // Section 2 — Non-smoker path
+        result.smokingImpactOnLife = checks("nsImpact");
+        result.wantSmokeBreakEquiv = radio("wantBreak");
+        result.wantToHelpSmokerQuit = radio("wantSupport");
+        result.boughtCigsAsGift = radio("giftSmoke");
 
-        // Contact details
-        result.contactName = document.querySelector(
-          'input[name="contactName"]',
-        ).value;
-        result.contactEmail = document.querySelector(
-          'input[name="contactEmail"]',
-        ).value;
-        result.contactPhone = document.querySelector(
-          'input[name="contactPhone"]',
-        ).value;
+        // Section 3 — The Spear
+        result.descriptionClarity = scaleValues["clarity"] || "";
+        result.mostResonantFeature = radio("resonate");
+        result.wouldTrySpear = radio("wouldTry");
+        result.trialBarrier = document.querySelector('textarea[name="tryBarrier"]').value;
+
+        // Section 4 — Buying Intent
+        result.purchaseLikelihood = radio("wouldBuy");
+        result.purchaseFor = checks("buyFor");
+        result.priceWillingToPay = document.querySelector('input[name="price"]').value;
+        result.subscribeInterest = radio("subscribe");
+        result.purchaseChannel = checks("channel");
+        result.finalThoughts = document.querySelector('textarea[name="finalThoughts"]').value;
+
+        // Section 5 — Contact
+        result.contactName = document.querySelector('input[name="contactName"]').value;
+        result.contactEmail = document.querySelector('input[name="contactEmail"]').value;
+        result.contactPhone = document.querySelector('input[name="contactPhone"]').value;
 
         console.log("Spearmint Survey Response:", result);
 
