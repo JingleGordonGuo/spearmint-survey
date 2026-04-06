@@ -356,48 +356,6 @@
       }
 
       /* ── Price options ── */
-      .price-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-      }
-      .price-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2px;
-        padding: 12px 8px;
-        border: 1px solid var(--border);
-        border-radius: 2px;
-        cursor: pointer;
-        transition: all 0.15s;
-        background: #fafcfa;
-        font-family: "DM Mono", monospace;
-      }
-      .price-btn:hover {
-        border-color: var(--green-mid);
-        background: var(--green-light);
-      }
-      .price-btn.selected {
-        border-color: var(--green);
-        background: var(--green);
-      }
-      .price-btn.selected .price-main,
-      .price-btn.selected .price-sub {
-        color: white;
-      }
-      .price-main {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--text);
-      }
-      .price-sub {
-        font-size: 9px;
-        color: var(--text-dim);
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-      }
-
       /* ── Spear description box ── */
       .spear-box {
         background: var(--green);
@@ -430,6 +388,24 @@
         font-size: 14px;
         flex-shrink: 0;
         margin-top: 1px;
+      }
+      .spear-photos {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .spear-photo {
+        flex: 1 1 0;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .spear-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
       }
 
       /* ── Nav buttons ── */
@@ -562,9 +538,6 @@
       }
 
       @media (max-width: 480px) {
-        .price-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
         .scale-grid {
           grid-template-columns: repeat(5, 1fr);
           gap: 4px;
@@ -601,11 +574,12 @@
       <!-- ════════════════════════════════ -->
       <div class="section active" id="sec1">
         <div class="section-header">
-          <div class="section-num">Section 01 / 04</div>
+          <div class="section-num">Section 01 / 05</div>
           <div class="section-title">About You</div>
           <div class="section-desc">
-            A few quick questions so we understand who you are. All responses
-            are completely anonymous.
+            A few quick questions so we understand who you are. Survey responses
+            are confidential — contact details at the end are entirely optional
+            and stored separately.
           </div>
         </div>
 
@@ -713,67 +687,49 @@
           <div class="error-msg">Please select one option.</div>
         </div>
 
-        <div class="q-card" id="qc-awareness">
+        <div class="q-card" id="qc-frequency">
           <div class="q-label">
             <span class="q-num">Q3</span
-            ><span
-              >How aware are you of the health impacts of smoking and secondhand
-              smoke?</span
-            >
+            ><span>How often do (or did) you smoke or vape?</span>
           </div>
-          <div class="scale-wrap">
-            <div class="scale-grid">
-              <button
-                type="button"
-                class="scale-btn"
-                data-name="awareness"
-                data-val="1"
-                onclick="selectScale(this)"
-              >
-                <span class="scale-num">1</span
-                ><span class="scale-text">Not at all aware</span>
-              </button>
-              <button
-                type="button"
-                class="scale-btn"
-                data-name="awareness"
-                data-val="2"
-                onclick="selectScale(this)"
-              >
-                <span class="scale-num">2</span
-                ><span class="scale-text">Slightly aware</span>
-              </button>
-              <button
-                type="button"
-                class="scale-btn"
-                data-name="awareness"
-                data-val="3"
-                onclick="selectScale(this)"
-              >
-                <span class="scale-num">3</span
-                ><span class="scale-text">Moderately aware</span>
-              </button>
-              <button
-                type="button"
-                class="scale-btn"
-                data-name="awareness"
-                data-val="4"
-                onclick="selectScale(this)"
-              >
-                <span class="scale-num">4</span
-                ><span class="scale-text">Very aware</span>
-              </button>
-              <button
-                type="button"
-                class="scale-btn"
-                data-name="awareness"
-                data-val="5"
-                onclick="selectScale(this)"
-              >
-                <span class="scale-num">5</span
-                ><span class="scale-text">Fully aware</span>
-              </button>
-            </div>
+          <div class="q-hint">If you don't smoke, select "Not applicable."</div>
+          <div class="options">
+            <label class="option-row"
+              ><input type="radio" name="frequency" value="Daily heavy" /><span
+                class="option-label"
+                >Daily — 10 or more cigarettes / vape sessions</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="radio" name="frequency" value="Daily light" /><span
+                class="option-label"
+                >Daily — fewer than 10</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="radio" name="frequency" value="Social" /><span
+                class="option-label"
+                >Socially — a few times a week or at events</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="radio" name="frequency" value="Occasional" /><span
+                class="option-label"
+                >Occasionally — a few times a month or less</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="radio" name="frequency" value="Former" /><span
+                class="option-label"
+                >I used to, but I've stopped</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="radio" name="frequency" value="N/A" /><span
+                class="option-label"
+                >Not applicable — I've never smoked or vaped</span
+              ></label
+            >
           </div>
         </div>
 
@@ -788,7 +744,7 @@
       <!-- ════════════════════════════════ -->
       <div class="section" id="sec2">
         <div class="section-header">
-          <div class="section-num">Section 02 / 04</div>
+          <div class="section-num">Section 02 / 05</div>
           <div class="section-title">Your Relationship with Smoking</div>
           <div class="section-desc">
             Help us understand the emotional and social dimensions of smoking in
@@ -1011,17 +967,160 @@
           </div>
         </div>
 
-        <!-- NON-SMOKER PATH -->
-        <div id="nonSmokerPath" style="display: none">
+        <!-- EX-SMOKER PATH -->
+        <div id="exSmokerPath" style="display: none">
           <div class="q-card">
             <div class="q-label">
               <span class="q-num">Q4</span
-              ><span>How does smoking affect your daily life?</span>
+              ><span>How long ago did you quit?</span>
             </div>
             <div class="options">
               <label class="option-row"
                 ><input
                   type="radio"
+                  name="exQuitWhen"
+                  value="Less than 6 months"
+                /><span class="option-label"
+                  >Less than 6 months ago</span
+                ></label
+              >
+              <label class="option-row"
+                ><input
+                  type="radio"
+                  name="exQuitWhen"
+                  value="6-12 months"
+                /><span class="option-label">6 – 12 months ago</span></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exQuitWhen" value="1-3 years" /><span
+                  class="option-label"
+                  >1 – 3 years ago</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exQuitWhen" value="3+ years" /><span
+                  class="option-label"
+                  >More than 3 years ago</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="q-card">
+            <div class="q-label">
+              <span class="q-num">Q5</span
+              ><span>Do you still experience cravings or miss the ritual?</span>
+            </div>
+            <div class="options">
+              <label class="option-row"
+                ><input type="radio" name="exCravings" value="Yes often" /><span
+                  class="option-label"
+                  >Yes — often. It's still a daily struggle.</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exCravings" value="Sometimes" /><span
+                  class="option-label"
+                  >Sometimes — certain situations still trigger it</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exCravings" value="Rarely" /><span
+                  class="option-label"
+                  >Rarely — I've mostly moved on</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exCravings" value="No" /><span
+                  class="option-label"
+                  >No — I don't think about it anymore</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="q-card">
+            <div class="q-label">
+              <span class="q-num">Q6</span
+              ><span
+                >Would something like the Spear have helped you during your quit
+                journey?</span
+              >
+            </div>
+            <div class="options">
+              <label class="option-row"
+                ><input
+                  type="radio"
+                  name="exWouldHelp"
+                  value="Yes definitely"
+                /><span class="option-label"
+                  >Yes — I wish I'd had something like this</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exWouldHelp" value="Maybe" /><span
+                  class="option-label"
+                  >Maybe — hard to say in hindsight</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exWouldHelp" value="No" /><span
+                  class="option-label"
+                  >No — I don't think it would have made a difference</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="q-card">
+            <div class="q-label">
+              <span class="q-num">Q7</span
+              ><span
+                >Would you recommend or gift a Spear to someone currently trying
+                to quit?</span
+              >
+            </div>
+            <div class="options">
+              <label class="option-row"
+                ><input
+                  type="radio"
+                  name="exGift"
+                  value="Yes definitely"
+                /><span class="option-label"
+                  >Yes — I'd want to help them the way I wish I'd been
+                  helped</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exGift" value="Maybe" /><span
+                  class="option-label"
+                  >Maybe — depends on the person</span
+                ></label
+              >
+              <label class="option-row"
+                ><input type="radio" name="exGift" value="No" /><span
+                  class="option-label"
+                  >No — quitting is too personal</span
+                ></label
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- NON-SMOKER PATH -->
+        <div id="nonSmokerPath" style="display: none">
+          <div class="q-card">
+            <div class="q-label">
+              <span class="q-num">Q4</span
+              ><span
+                >How does smoking affect your daily life? (select all that
+                apply)</span
+              >
+            </div>
+            <div class="options">
+              <label class="option-row"
+                ><input
+                  type="checkbox"
                   name="nsImpact"
                   value="Colleague takes breaks"
                 /><span class="option-label"
@@ -1031,7 +1130,7 @@
               >
               <label class="option-row"
                 ><input
-                  type="radio"
+                  type="checkbox"
                   name="nsImpact"
                   value="Worried about loved one"
                 /><span class="option-label"
@@ -1039,14 +1138,8 @@
                 ></label
               >
               <label class="option-row"
-                ><input type="radio" name="nsImpact" value="Both" /><span
-                  class="option-label"
-                  >Both of the above</span
-                ></label
-              >
-              <label class="option-row"
                 ><input
-                  type="radio"
+                  type="checkbox"
                   name="nsImpact"
                   value="Secondhand smoke"
                 /><span class="option-label"
@@ -1054,7 +1147,7 @@
                 ></label
               >
               <label class="option-row"
-                ><input type="radio" name="nsImpact" value="Not much" /><span
+                ><input type="checkbox" name="nsImpact" value="Not much" /><span
                   class="option-label"
                   >It doesn't affect my daily life much</span
                 ></label
@@ -1193,7 +1286,7 @@
       <!-- ════════════════════════════════ -->
       <div class="section" id="sec3">
         <div class="section-header">
-          <div class="section-num">Section 03 / 04</div>
+          <div class="section-num">Section 03 / 05</div>
           <div class="section-title">Meet the Spear</div>
           <div class="section-desc">
             Read the description below carefully before answering.
@@ -1201,52 +1294,55 @@
         </div>
 
         <div class="spear-box">
-          <div class="spear-box-title">🗡️ What is the Spear?</div>
+          <div class="spear-box-title">What is the Spear?</div>
+          <div class="spear-photos">
+            <div class="spear-photo">
+              <img src="spear.jpg" alt="Prototype Spear — paper straw filled with tea leaves and dried osmanthus flowers" />
+            </div>
+            <div class="spear-photo">
+              <img src="tea.jpg" alt="Tea brewed from Spear contents" />
+            </div>
+          </div>
           <div class="spear-box-body">
-            The Spear is a wellbeing device designed to
+            The Spear is a cigarette-shaped device designed as
             <strong style="color: #86efac"
-              >hijack the smoking habit loop</strong
-            >
-            — without nicotine, tobacco, or harmful chemicals.
+              >a non-nicotine alternative to smoking</strong
+            >. It contains no nicotine, tobacco, or combustion.
+
             <div class="spear-feature">
               <span class="spear-feature-icon">🌿</span
               ><span
-                >It looks and feels exactly like a cigarette. Inside is crushed
-                aromatic tea leaves sealed in a breathable mesh. Every slow draw
-                delivers a clean, flavoured breath — like a moment of
-                meditation.</span
+                >It is shaped like a cigarette and contains crushed aromatic tea
+                leaves in a breathable mesh. Drawing on it delivers a
+                flavoured breath without smoke or vapour.</span
               >
             </div>
             <div class="spear-feature">
-              <span class="spear-feature-icon">☕</span
+              <span class="spear-feature-icon">🍵</span
               ><span
-                >When you're done, you can tear it open and steep the contents
-                in hot water — turning your break into a warm drink with the
-                full benefits of the tea leaves.</span
+                >After use, the tea leaves inside can be steeped in hot water
+                to make a drink.</span
               >
             </div>
             <div class="spear-feature">
               <span class="spear-feature-icon">🛡️</span
               ><span
                 >It comes with a ring worn on your smoking finger — engraved
-                with your family surname — to remind you who you're fighting for
-                every time you reach for a cigarette.</span
+                with your family surname — as a personal reminder during
+                cravings.</span
               >
             </div>
             <div class="spear-feature">
               <span class="spear-feature-icon">🤝</span
               ><span
-                >Friends and family can sponsor your quit journey. Non-smokers
-                get their own Spear too — joining the break, joining the
-                movement.</span
+                >Friends and family can sponsor a smoker's quit journey.
+                Non-smokers can also receive their own Spear to use during
+                shared breaks.</span
               >
             </div>
             <div class="spear-feature">
               <span class="spear-feature-icon">♻️</span
-              ><span
-                >Fully biodegradable. Unlike cigarette butts, every Spear
-                composts completely.</span
-              >
+              ><span>The Spear is fully biodegradable and compostable.</span>
             </div>
           </div>
         </div>
@@ -1481,31 +1577,24 @@
           <div class="q-label">
             <span class="q-num">Q12</span
             ><span
-              >Would you buy a Spear for yourself or as a gift for someone you
-              care about?<span class="q-required">*</span></span
+              >How likely are you to buy a Spear?<span class="q-required"
+                >*</span
+              ></span
             >
           </div>
           <div class="options" id="buyOptions">
             <label class="option-row"
-              ><input
-                type="radio"
-                name="wouldBuy"
-                value="Strong yes for me"
-              /><span class="option-emoji">🙌</span
-              ><span class="option-label">Strong yes — for myself</span></label
+              ><input type="radio" name="wouldBuy" value="Definitely" /><span
+                class="option-emoji"
+                >🙌</span
+              ><span class="option-label">Definitely — I'd buy one</span></label
             >
             <label class="option-row"
-              ><input type="radio" name="wouldBuy" value="Yes for me" /><span
+              ><input type="radio" name="wouldBuy" value="Probably" /><span
                 class="option-emoji"
                 >👍</span
-              ><span class="option-label">Yes — for myself</span></label
-            >
-            <label class="option-row"
-              ><input type="radio" name="wouldBuy" value="Yes as gift" /><span
-                class="option-emoji"
-                >🎁</span
               ><span class="option-label"
-                >Yes — as a gift for someone I love</span
+                >Probably — I'm interested</span
               ></label
             >
             <label class="option-row"
@@ -1517,10 +1606,16 @@
               ></label
             >
             <label class="option-row"
-              ><input type="radio" name="wouldBuy" value="No" /><span
+              ><input type="radio" name="wouldBuy" value="Unlikely" /><span
                 class="option-emoji"
                 >👎</span
-              ><span class="option-label">No</span></label
+              ><span class="option-label">Unlikely</span></label
+            >
+            <label class="option-row"
+              ><input type="radio" name="wouldBuy" value="No" /><span
+                class="option-emoji"
+                >🙅</span
+              ><span class="option-label">No — not for me</span></label
             >
           </div>
           <div class="error-msg">Please select one option.</div>
@@ -1529,6 +1624,35 @@
         <div class="q-card">
           <div class="q-label">
             <span class="q-num">Q13</span
+            ><span>Who would you buy it for? (select all that apply)</span>
+          </div>
+          <div class="options">
+            <label class="option-row"
+              ><input type="checkbox" name="buyFor" value="Myself" /><span
+                class="option-label"
+                >Myself</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="checkbox" name="buyFor" value="Gift" /><span
+                class="option-emoji"
+                >🎁</span
+              ><span class="option-label"
+                >As a gift for someone I care about</span
+              ></label
+            >
+            <label class="option-row"
+              ><input type="checkbox" name="buyFor" value="Neither" /><span
+                class="option-label"
+                >I wouldn't buy it</span
+              ></label
+            >
+          </div>
+        </div>
+
+        <div class="q-card" id="qc-price">
+          <div class="q-label">
+            <span class="q-num">Q14</span
             ><span
               >How much would you pay for a pack of 5 Spears?<span
                 class="q-required"
@@ -1538,71 +1662,35 @@
           </div>
           <div class="q-hint">
             Each Spear = one 5-minute mindful break + steepable tea afterwards.
+            Enter a dollar amount.
           </div>
-          <div class="price-grid" id="priceGrid">
-            <button
-              type="button"
-              class="price-btn"
-              data-val="Under $5"
-              onclick="selectPrice(this)"
-            >
-              <span class="price-main">Under $5</span
-              ><span class="price-sub">Under $1 each</span>
-            </button>
-            <button
-              type="button"
-              class="price-btn"
-              data-val="$5–$8"
-              onclick="selectPrice(this)"
-            >
-              <span class="price-main">$5 – $8</span
-              ><span class="price-sub">$1–1.60 each</span>
-            </button>
-            <button
-              type="button"
-              class="price-btn"
-              data-val="$8–$12"
-              onclick="selectPrice(this)"
-            >
-              <span class="price-main">$8 – $12</span
-              ><span class="price-sub">$1.60–2.40 each</span>
-            </button>
-            <button
-              type="button"
-              class="price-btn"
-              data-val="$12–$18"
-              onclick="selectPrice(this)"
-            >
-              <span class="price-main">$12 – $18</span
-              ><span class="price-sub">$2.40–3.60 each</span>
-            </button>
-            <button
-              type="button"
-              class="price-btn"
-              data-val="$18–$25"
-              onclick="selectPrice(this)"
-            >
-              <span class="price-main">$18 – $25</span
-              ><span class="price-sub">$3.60–5 each</span>
-            </button>
-            <button
-              type="button"
-              class="price-btn"
-              data-val="Over $25"
-              onclick="selectPrice(this)"
-            >
-              <span class="price-main">Over $25</span
-              ><span class="price-sub">Premium tier</span>
-            </button>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span style="font-size: 1.2rem; color: var(--text-mid)">$</span>
+            <input
+              type="number"
+              name="price"
+              min="0"
+              step="1"
+              placeholder="0"
+              style="
+                width: 140px;
+                padding: 12px 14px;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                font-family: inherit;
+                font-size: 1rem;
+                background: var(--surface);
+                color: var(--text);
+                outline: none;
+              "
+            />
           </div>
-          <div class="error-msg" id="err-price">
-            Please select a price range.
-          </div>
+          <div class="error-msg" id="err-price">Please enter an amount.</div>
         </div>
 
         <div class="q-card">
           <div class="q-label">
-            <span class="q-num">Q14</span
+            <span class="q-num">Q15</span
             ><span
               >Would you subscribe to receive Spears monthly as part of a quit
               journey care package?</span
@@ -1644,7 +1732,7 @@
 
         <div class="q-card">
           <div class="q-label">
-            <span class="q-num">Q15</span
+            <span class="q-num">Q16</span
             ><span>Where would you most expect to find and buy a Spear?</span>
           </div>
           <div class="options">
@@ -1698,7 +1786,7 @@
 
         <div class="q-card">
           <div class="q-label">
-            <span class="q-num">Q16</span
+            <span class="q-num">Q17</span
             ><span
               >Any final thoughts, ideas, or questions for the Spearmint team?
               (optional)</span
@@ -1724,53 +1812,82 @@
           <div class="section-num">Section 05 / 05</div>
           <div class="section-title">Stay in the Loop</div>
           <div class="section-desc">
-            Want to be the first to know when the Spear becomes available?
-            Drop your details below — completely optional, no spam, ever.
+            Want to be the first to know when the Spear becomes available? Drop
+            your details below — completely optional, no spam, ever.
           </div>
         </div>
 
         <div class="q-card">
           <div class="q-label">
-            <span class="q-num">Q17</span
-            ><span>Your name (optional)</span>
+            <span class="q-num">Q18</span><span>Your name (optional)</span>
           </div>
           <input
             type="text"
             name="contactName"
             placeholder="First name or full name — whatever you're comfortable with"
-            style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.92rem;background:var(--surface);color:var(--text);outline:none;"
+            style="
+              width: 100%;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              font-family: inherit;
+              font-size: 0.92rem;
+              background: var(--surface);
+              color: var(--text);
+              outline: none;
+            "
           />
         </div>
 
         <div class="q-card">
           <div class="q-label">
-            <span class="q-num">Q18</span
-            ><span>Email address (optional)</span>
+            <span class="q-num">Q19</span><span>Email address (optional)</span>
           </div>
           <div class="q-hint">
-            We'll only use this to let you know about launch updates and early access.
+            We'll only use this to let you know about launch updates and early
+            access.
           </div>
           <input
             type="email"
             name="contactEmail"
             placeholder="you@example.com"
-            style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.92rem;background:var(--surface);color:var(--text);outline:none;"
+            style="
+              width: 100%;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              font-family: inherit;
+              font-size: 0.92rem;
+              background: var(--surface);
+              color: var(--text);
+              outline: none;
+            "
           />
         </div>
 
         <div class="q-card">
           <div class="q-label">
-            <span class="q-num">Q19</span
-            ><span>Phone number (optional)</span>
+            <span class="q-num">Q20</span><span>Phone number (optional)</span>
           </div>
           <div class="q-hint">
-            If you'd prefer a text when things are ready, leave your number here.
+            If you'd prefer a text when things are ready, leave your number
+            here.
           </div>
           <input
             type="tel"
             name="contactPhone"
             placeholder="+61 4XX XXX XXX"
-            style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.92rem;background:var(--surface);color:var(--text);outline:none;"
+            style="
+              width: 100%;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              font-family: inherit;
+              font-size: 0.92rem;
+              background: var(--surface);
+              color: var(--text);
+              outline: none;
+            "
           />
         </div>
 
@@ -1805,18 +1922,102 @@
         <div class="thankyou-tagline">
           "We are going to cut through this smoke — together."
         </div>
+        <button class="btn-next" onclick="resetForm()" style="margin-top:28px;">
+          Submit Another Response →
+        </button>
       </div>
     </div>
     <!-- /container -->
 
     <script>
       // ── State ─────────────────────────────────────────────────────
+      var STORAGE_KEY = "spearmint_survey";
       var currentSection = 1;
       var totalSections = 5;
       var formData = {};
       var scaleValues = {};
-      var priceValue = "";
       var isSmoker = true;
+      var isExSmoker = false;
+
+      // ── LocalStorage helpers ──────────────────────────────────────
+      function saveState() {
+        var state = {
+          currentSection: currentSection,
+          scaleValues: scaleValues,
+          isSmoker: isSmoker,
+          isExSmoker: isExSmoker,
+          radios: {},
+          checkboxes: {},
+          texts: {},
+        };
+        // Radios
+        document.querySelectorAll('input[type="radio"]:checked').forEach(function (r) {
+          state.radios[r.name] = r.value;
+        });
+        // Checkboxes
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (c) {
+          if (!state.checkboxes[c.name]) state.checkboxes[c.name] = [];
+          state.checkboxes[c.name].push(c.value);
+        });
+        // Text inputs and textareas
+        document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea').forEach(function (el) {
+          if (el.name && el.value) state.texts[el.name] = el.value;
+        });
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+      }
+
+      function loadState() {
+        var raw;
+        try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+        if (!raw) return;
+        var state = JSON.parse(raw);
+
+        // Restore radios
+        Object.keys(state.radios).forEach(function (name) {
+          var el = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(state.radios[name]) + '"]');
+          if (el) {
+            el.checked = true;
+            el.closest(".option-row").classList.add("selected");
+          }
+        });
+        // Restore checkboxes
+        Object.keys(state.checkboxes).forEach(function (name) {
+          state.checkboxes[name].forEach(function (val) {
+            var el = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(val) + '"]');
+            if (el) {
+              el.checked = true;
+              el.closest(".option-row").classList.add("selected");
+            }
+          });
+        });
+        // Restore text inputs
+        Object.keys(state.texts).forEach(function (name) {
+          var el = document.querySelector('[name="' + name + '"]');
+          if (el) el.value = state.texts[name];
+        });
+        // Restore scale buttons
+        scaleValues = state.scaleValues || {};
+        Object.keys(scaleValues).forEach(function (name) {
+          var btn = document.querySelector('.scale-btn[data-name="' + name + '"][data-val="' + scaleValues[name] + '"]');
+          if (btn) btn.classList.add("selected");
+        });
+        // Restore branching state
+        isSmoker = state.isSmoker;
+        isExSmoker = state.isExSmoker;
+        document.getElementById("smokerPath").style.display = isSmoker ? "block" : "none";
+        document.getElementById("exSmokerPath").style.display = isExSmoker ? "block" : "none";
+        document.getElementById("nonSmokerPath").style.display = !isSmoker && !isExSmoker ? "block" : "none";
+        // Restore section
+        if (state.currentSection > 1) {
+          document.getElementById("sec1").classList.remove("active");
+          currentSection = state.currentSection;
+          document.getElementById("sec" + currentSection).classList.add("active");
+        }
+      }
+
+      function clearState() {
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      }
 
       // ── Progress ──────────────────────────────────────────────────
       function updateProgress(sec) {
@@ -1836,20 +2037,28 @@
           });
           e.target.closest(".option-row").classList.add("selected");
 
-          // Branch logic for smoker/non-smoker
+          // Branch logic for smoker/ex-smoker/non-smoker
           if (name === "smoker") {
             var val = e.target.value;
             isSmoker =
               val === "Current smoker" ||
               val === "Current vaper" ||
-              val === "Both" ||
-              val === "Ex-smoker";
+              val === "Both";
+            isExSmoker = val === "Ex-smoker";
           }
         }
         if (e.target.type === "checkbox") {
           var row = e.target.closest(".option-row");
           if (e.target.checked) row.classList.add("selected");
           else row.classList.remove("selected");
+        }
+        saveState();
+      });
+
+      // Save text inputs on typing
+      document.addEventListener("input", function (e) {
+        if (e.target.tagName === "TEXTAREA" || e.target.type === "text" || e.target.type === "email" || e.target.type === "tel" || e.target.type === "number") {
+          saveState();
         }
       });
 
@@ -1863,20 +2072,7 @@
           });
         btn.classList.add("selected");
         scaleValues[name] = btn.dataset.val;
-      }
-
-      // ── Price buttons ─────────────────────────────────────────────
-      function selectPrice(btn) {
-        document.querySelectorAll(".price-btn").forEach(function (b) {
-          b.classList.remove("selected");
-        });
-        btn.classList.add("selected");
-        priceValue = btn.dataset.val;
-        document.getElementById("err-price").style.display = "none";
-        document
-          .getElementById("priceGrid")
-          .closest(".q-card")
-          .classList.remove("has-error");
+        saveState();
       }
 
       // ── Validation ────────────────────────────────────────────────
@@ -1949,13 +2145,15 @@
           } else buyCard.classList.remove("has-error");
 
           // Price
-          if (!priceValue) {
-            document
-              .getElementById("priceGrid")
-              .closest(".q-card")
-              .classList.add("has-error");
+          var priceInput = document.querySelector('input[name="price"]');
+          var priceCard = document.getElementById("qc-price");
+          if (!priceInput.value || Number(priceInput.value) < 0) {
+            priceCard.classList.add("has-error");
             document.getElementById("err-price").style.display = "block";
             valid = false;
+          } else {
+            priceCard.classList.remove("has-error");
+            document.getElementById("err-price").style.display = "none";
           }
         }
 
@@ -1969,20 +2167,23 @@
           return;
         }
 
-        // Show/hide smoker vs non-smoker path on entering sec2
+        // Show/hide smoker vs ex-smoker vs non-smoker path on entering sec2
         if (from === 1) {
           document.getElementById("smokerPath").style.display = isSmoker
             ? "block"
             : "none";
-          document.getElementById("nonSmokerPath").style.display = isSmoker
-            ? "none"
-            : "block";
+          document.getElementById("exSmokerPath").style.display = isExSmoker
+            ? "block"
+            : "none";
+          document.getElementById("nonSmokerPath").style.display =
+            !isSmoker && !isExSmoker ? "block" : "none";
         }
 
         document.getElementById("sec" + from).classList.remove("active");
         currentSection = from + 1;
         document.getElementById("sec" + currentSection).classList.add("active");
         updateProgress(currentSection);
+        saveState();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
@@ -1991,6 +2192,7 @@
         currentSection = from - 1;
         document.getElementById("sec" + currentSection).classList.add("active");
         updateProgress(currentSection);
+        saveState();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
@@ -2008,9 +2210,13 @@
         [
           "age",
           "smoker",
+          "frequency",
           "wantQuit",
           "triedQuit",
-          "nsImpact",
+          "exQuitWhen",
+          "exCravings",
+          "exWouldHelp",
+          "exGift",
           "wantBreak",
           "wantSupport",
           "giftSmoke",
@@ -2024,23 +2230,24 @@
         });
 
         // Checkboxes
-        ["motivator", "enjoys", "channel"].forEach(function (name) {
-          var checked = document.querySelectorAll(
-            'input[name="' + name + '"]:checked',
-          );
-          result[name] = Array.from(checked)
-            .map(function (c) {
-              return c.value;
-            })
-            .join("; ");
-        });
+        ["motivator", "enjoys", "nsImpact", "buyFor", "channel"].forEach(
+          function (name) {
+            var checked = document.querySelectorAll(
+              'input[name="' + name + '"]:checked',
+            );
+            result[name] = Array.from(checked)
+              .map(function (c) {
+                return c.value;
+              })
+              .join("; ");
+          },
+        );
 
         // Scales
-        result.awareness = scaleValues["awareness"] || "";
         result.clarity = scaleValues["clarity"] || "";
 
         // Price
-        result.price = priceValue;
+        result.price = document.querySelector('input[name="price"]').value;
 
         // Textareas
         result.tryBarrier = document.querySelector(
@@ -2051,9 +2258,15 @@
         ).value;
 
         // Contact details
-        result.contactName = document.querySelector('input[name="contactName"]').value;
-        result.contactEmail = document.querySelector('input[name="contactEmail"]').value;
-        result.contactPhone = document.querySelector('input[name="contactPhone"]').value;
+        result.contactName = document.querySelector(
+          'input[name="contactName"]',
+        ).value;
+        result.contactEmail = document.querySelector(
+          'input[name="contactEmail"]',
+        ).value;
+        result.contactPhone = document.querySelector(
+          'input[name="contactPhone"]',
+        ).value;
 
         console.log("Spearmint Survey Response:", result);
 
@@ -2067,6 +2280,8 @@
           },
         );
 
+        clearState();
+
         // Hide all sections, show thank you
         for (var i = 1; i <= totalSections; i++) {
           var s = document.getElementById("sec" + i);
@@ -2078,8 +2293,34 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
+      // ── Reset ─────────────────────────────────────────────────────
+      function resetForm() {
+        clearState();
+        // Reset all inputs
+        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function (el) {
+          el.checked = false;
+          el.closest(".option-row").classList.remove("selected");
+        });
+        document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea').forEach(function (el) {
+          el.value = "";
+        });
+        document.querySelectorAll(".scale-btn").forEach(function (b) {
+          b.classList.remove("selected");
+        });
+        scaleValues = {};
+        isSmoker = true;
+        isExSmoker = false;
+        currentSection = 1;
+        // Hide thank you, show section 1
+        document.getElementById("thankyou").style.display = "none";
+        document.getElementById("sec1").classList.add("active");
+        updateProgress(1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       // ── Init ─────────────────────────────────────────────────────
-      updateProgress(1);
+      loadState();
+      updateProgress(currentSection);
     </script>
   </body>
 </html>
